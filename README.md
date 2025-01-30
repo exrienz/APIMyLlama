@@ -334,6 +334,20 @@ async fn main() -> Result<(), Box<dyn Error>> {
 }
 ```
 
+Curl Example
+```
+curl -X POST "{DOMAIN/IP}/generate" \
+     --no-buffer \
+     -H "Content-Type: application/json" \
+     -d '{
+           "apikey": "{API_KEY}",
+           "prompt": "Why the blood is red?",
+           "model": "tinyllama",
+           "stream": true
+         }'
+
+```
+
 ## Checking API Health
 The packages have built in health checking command (AS OF V2)
 If you already have the Node.js or Python packages installed then you can just copy and paste the code below to test.
@@ -420,19 +434,57 @@ async fn main() -> Result<(), Box<dyn Error>> {
 }
 ```
 
-Curl Example
-```
-curl -X POST "{DOMAIN/IP}/generate" \
-     --no-buffer \
-     -H "Content-Type: application/json" \
-     -d '{
-           "apikey": "{API_KEY}",
-           "prompt": "Why the blood is red?",
-           "model": "tinyllama",
-           "stream": true
-         }'
+## Autorun on boot
 
-```
+To set up your Node.js application, `APIMyLlama.js`, to auto-run on boot, I'll provide you with tailored steps based on your provided path (`/home/exrienz/APIMyLlama/`). I'll assume you're using a Linux-based OS (Ubuntu/Debian). If you're using a different operating system, let me know!
+
+### **Linux (Ubuntu/Debian)**
+
+#### **Using `systemd`**
+
+1. **Create a service file**  
+   Open a terminal and run:
+   ```sh
+   sudo nano /etc/systemd/system/apimyllama.service
+   ```
+
+2. **Add the following content**  
+   Replace the paths with your actual paths, ensuring that `/usr/bin/node` points to your Node.js installation. If you have a specific Node.js version manager like `nvm`, adjust accordingly.
+
+   ```ini
+   [Unit]
+   Description=APIMyLlama Node.js Application
+   After=network.target
+
+   [Service]
+   ExecStart=/usr/bin/node {YOUR_FULL_PATH}/APIMyLlama/APIMyLlama.js
+   WorkingDirectory={YOUR_FULL_PATH}/APIMyLlama
+   Restart=always
+   User=root
+   Group=root
+   Environment=NODE_ENV=production
+   StandardOutput=syslog
+   StandardError=syslog
+   SyslogIdentifier=apimyllama
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+3. **Enable and start the service**  
+   Reload `systemd` to recognize the new service:
+   ```sh
+   sudo systemctl daemon-reload
+   sudo systemctl enable apimyllama
+   sudo systemctl start apimyllama
+   ```
+
+4. **Check the service status**  
+   To verify that the service is running correctly:
+   ```sh
+   sudo systemctl status apimyllama
+   ```
+
 
 ## API References
 ```
