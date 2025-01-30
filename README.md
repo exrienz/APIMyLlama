@@ -420,6 +420,20 @@ async fn main() -> Result<(), Box<dyn Error>> {
 }
 ```
 
+Curl Example
+```
+curl -X POST "{DOMAIN/IP}/generate" \
+     --no-buffer \
+     -H "Content-Type: application/json" \
+     -d '{
+           "apikey": "{API_KEY}",
+           "prompt": "Why the blood is red?",
+           "model": "tinyllama",
+           "stream": true
+         }'
+
+```
+
 ## API References
 ```
 ApiMyLlama(ip, port)
