@@ -532,3 +532,4 @@ If you have a custom port set for your Ollama server this is a simple fix. Just 
 ## Authors
 
 - [@gimerstudios](https://github.com/Gimer-Studios)
+- [@Exrienz](https://github.com/exrienz/)
