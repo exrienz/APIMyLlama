@@ -436,7 +436,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
 ## Autorun on boot
 
-To set up your Node.js application, `APIMyLlama.js`, to auto-run on boot, I'll provide you with tailored steps based on your provided path (`/home/exrienz/APIMyLlama/`). I'll assume you're using a Linux-based OS (Ubuntu/Debian). If you're using a different operating system, let me know!
+To set up your Node.js application, `APIMyLlama.js`, to auto-run on boot, I'll provide you with tailored steps based on your provided path (`/{YOUR_PATH}/APIMyLlama/`). I'll assume you're using a Linux-based OS (Ubuntu/Debian). If you're using a different operating system, let me know!
 
 ### **Linux (Ubuntu/Debian)**
 
