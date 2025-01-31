@@ -272,34 +272,8 @@ if __name__ == "__main__":
     main()
 ```
 
-Java Example:
-```bash
-import com.gimerstudios.apimyllama.ApiMyLlama;
-import java.io.IOException;
 
-public class TestAPIMyLlama {
-
-    public static void main(String[] args) {
-        String serverIp = "SERVER_IP";
-        int serverPort = SERVER_PORT;
-        String apiKey = "API_KEY";
-        String prompt = "Hello!";
-        String model = "llama3";
-        boolean stream = false;
-
-        ApiMyLlama apiMyLlama = new ApiMyLlama(serverIp, serverPort);
-
-        try {
-            String response = apiMyLlama.generate(apiKey, prompt, model, stream);
-            System.out.println("Generate Response: " + response);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-Python3 alt:
+Python3 alt (python3 ai.py --api_key="YOUR_KEY" --m="tinyllama" "Why is the sky black?"):
 ```python
 import subprocess
 import shlex
@@ -351,6 +325,34 @@ if __name__ == "__main__":
     extract_response(args.api_key, args.model, args.prompt)
 
 ```
+
+Java Example:
+```bash
+import com.gimerstudios.apimyllama.ApiMyLlama;
+import java.io.IOException;
+
+public class TestAPIMyLlama {
+
+    public static void main(String[] args) {
+        String serverIp = "SERVER_IP";
+        int serverPort = SERVER_PORT;
+        String apiKey = "API_KEY";
+        String prompt = "Hello!";
+        String model = "llama3";
+        boolean stream = false;
+
+        ApiMyLlama apiMyLlama = new ApiMyLlama(serverIp, serverPort);
+
+        try {
+            String response = apiMyLlama.generate(apiKey, prompt, model, stream);
+            System.out.println("Generate Response: " + response);
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
 
 
 Rust Example:
