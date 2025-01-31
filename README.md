@@ -299,3 +299,26 @@ To set up your Node.js application, `APIMyLlama.js`, to auto-run on boot, I'll p
    sudo systemctl status apimyllama
    ```
 
+   ## FAQ
+
+#### 1. Why am I getting the module not found error?
+
+You most likely forgot to run the 'npm install' command after cloning the repository.
+
+#### 2. Why can't I use the API outside my network?
+
+You probably didn't port foward. And if you did your router may have not intialized the changes yet or applied them.
+
+#### 3. Ollama Serve command error "Error: listen tcp 127.0.0.1:11434: bind: Only one usage of each socket address (protocol/network address/port) is normally permitted."
+
+If you get this error just close the Ollama app through the system tray on Windows. And if your on Linux just use systemctl to stop the Ollama process. Once done you can try running the ollama serve command again.
+
+#### 4. error: 'Error making request to Ollama API'
+
+If you have a custom port set for your Ollama server this is a simple fix. Just run the 'changeollamaurl <YOUR_OLLAMA_SERVER_URL>' and change it to the url your Ollama server is running on. By default it is "http://localhost:11434" but if you changed it you will need to do this. You can also fix this problem through changing the port in the ollamaURL.conf file.
+
+## Authors
+
+- [@gimerstudios - Original](https://github.com/Gimer-Studios) -
+- [@Exrienz](https://github.com/exrienz/)
+
