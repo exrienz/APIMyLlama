@@ -299,6 +299,60 @@ public class TestAPIMyLlama {
 }
 ```
 
+Python3 alt:
+```python
+import subprocess
+import shlex
+import re
+import json
+import argparse
+
+def extract_response(api_key, model, prompt):
+    payload = json.dumps({
+        "apikey": api_key,
+        "prompt": prompt,
+        "model": model
+    })
+
+    curl_command = f'curl -X POST https://gpt.code-x.my/generate -H "Content-Type: application/json" -d {shlex.quote(payload)}'
+
+    try:
+        result = subprocess.run(curl_command, shell=True, capture_output=True, text=True)
+
+        if result.returncode != 0:
+            print(f"Error occurred: {result.stderr.strip()}")
+            return
+
+        cleaned_output = result.stdout.replace("\\", "")
+        json_objects = re.findall(r'\{.*?\}', cleaned_output)
+
+        responses = []
+        for obj in json_objects:
+            try:
+                data = json.loads(obj)
+                if 'response' in data:
+                    responses.append(data['response'])
+            except json.JSONDecodeError:
+                continue
+
+        print(''.join(responses))
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Send a prompt to the API and extract the response.")
+    parser.add_argument("--api_key", required=True, help="The API key for authentication.")
+    parser.add_argument("--m", "--model", dest="model", required=True, help="The model to use (e.g., tinyllama).")
+    parser.add_argument("prompt", help="The prompt to send to the API.")  # Ensure this is treated as a positional argument
+
+    args = parser.parse_args()
+
+    extract_response(args.api_key, args.model, args.prompt)
+
+```
+
+
 Rust Example:
 ```bash
 use apimyllama::ApiMyLlama;
